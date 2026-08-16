@@ -1,27 +1,27 @@
-// main window right pane
+// 主窗口右侧窗格
 
 import 'dart:async';
-import 'dart:convert';
-import 'dart:math';
+导入 'dart:convert';
+导入 'dart:math';
 
-import 'package:flutter/material.dart';
-import 'package:flutter_hbb/common/widgets/connection_page_title.dart';
-import 'package:flutter_hbb/consts.dart';
-import 'package:flutter_hbb/desktop/widgets/popup_menu.dart';
-import 'package:flutter_hbb/models/state_model.dart';
-import 'package:get/get.dart';
-import 'package:url_launcher/url_launcher_string.dart';
-import 'package:window_manager/window_manager.dart';
-import 'package:flutter_hbb/models/peer_model.dart';
+导入 'package:flutter/material.dart';
+导入 'package:flutter_hbb/common/widgets/connection_page_title.dart';
+导入 'package:flutter_hbb/consts.dart';
+导入 'package:flutter_hbb/desktop/widgets/popup_menu.dart';
+导入 'package:flutter_hbb/models/state_model.dart';
+导入 'package:get/get.dart';
+导入 'package:url_launcher/url_launcher_string.dart';
+导入 'package:window_manager/window_manager.dart';
+导入 'package:flutter_hbb/models/peer_model.dart';
 
-import '../../common.dart';
-import '../../common/formatter/id_formatter.dart';
-import '../../common/widgets/peer_tab_page.dart';
-import '../../common/widgets/autocomplete.dart';
-import '../../models/platform_model.dart';
-import '../../desktop/widgets/material_mod_popup_menu.dart' as mod_menu;
+导入'../../common.dart';
+导入 '../../common/formatter/id_formatter.dart';
+导入 '../../common/widgets/peer_tab_page.dart';
+导入 '../../common/widgets/autocomplete.dart';
+导入 '../../models/platform_model.dart';
+导入 '../../desktop/widgets/material_mod_popup_menu.dart' 为 mod_menu;
 
-class OnlineStatusWidget extends StatefulWidget {
+类 OnlineStatusWidget 继承自 StatefulWidget {
   const OnlineStatusWidget({Key? key, this.onSvcStatusChanged})
       : super(key: key);
 
@@ -31,7 +31,7 @@ class OnlineStatusWidget extends StatefulWidget {
   State<OnlineStatusWidget> createState() => _OnlineStatusWidgetState();
 }
 
-/// State for the connection page.
+/// 连接页面的状态。
 class _OnlineStatusWidgetState extends State<OnlineStatusWidget> {
   final _svcStopped = Get.find<RxBool>(tag: 'stop-service');
   final _svcIsUsingPublicServer = true.obs;
@@ -266,7 +266,7 @@ class _ConnectionPageState extends State<ConnectionPage>
 
   @override
   void onWindowLeaveFullScreen() {
-    // Restore edge border to default edge size.
+    // 将边缘边框恢复为默认大小。
     stateGlobal.resizeEdgeSize.value = stateGlobal.isMaximized.isTrue
         ? kMaximizeEdgeSize
         : windowResizeEdgeSize;
@@ -281,12 +281,12 @@ class _ConnectionPageState extends State<ConnectionPage>
   void onFocusChanged() {
     _idInputFocused.value = _idFocusNode.hasFocus;
     if (_idFocusNode.hasFocus) {
-      if (_allPeersLoader.needLoad) {
+      如果 (_allPeersLoader.needLoad) {
         _allPeersLoader.getAllPeers();
       }
 
-      final textLength = _idEditingController.value.text.length;
-      // Select all to facilitate removing text, just following the behavior of address input of chrome.
+      最终 textLength = _idEditingController.value.text.length;
+      // 选择全部以便于移除文本，这与 Chrome 浏览器地址栏的行为一致。
       _idEditingController.selection =
           TextSelection(baseOffset: 0, extentOffset: textLength);
     }
@@ -300,18 +300,17 @@ class _ConnectionPageState extends State<ConnectionPage>
         Expanded(
             child: Column(
           children: [
-            Row(
-              children: [
+            行(
+              子组件: [
                 Flexible(child: _buildRemoteIDTextField(context)),
               ],
             ).marginOnly(top: 22),
-            SizedBox(height: 12),
-            Divider().paddingOnly(right: 12),
-            Expanded(child: PeerTabPage()),
+
+            展开(子组件: PeerTabPage()),
           ],
         ).paddingOnly(left: 12.0)),
-        if (!isOutgoingOnly) const Divider(height: 1),
-        if (!isOutgoingOnly) OnlineStatusWidget()
+        如果 (!isOutgoingOnly) 常量 分割线(高度: 1),
+        如果 (!isOutgoingOnly) 在线状态小部件()
       ],
     );
   }
@@ -342,8 +341,8 @@ class _ConnectionPageState extends State<ConnectionPage>
         child: Column(
           children: [
             getConnectionPageTitle(context, false).marginOnly(bottom: 15),
-            Row(
-              children: [
+            行(
+              子组件: [
                 Expanded(
                     child: RawAutocomplete<Peer>(
                   optionsBuilder: (TextEditingValue textEditingValue) {
